@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../utils/animations_util.dart';
 import '../../../theme/theme.dart';
@@ -11,12 +10,12 @@ import '../widgets/home_history_tile.dart';
 const String blablaHomeImagePath = 'assets/images/blabla_home.png';
 
 class HomeContent extends StatelessWidget {
-  const HomeContent({super.key});
+  final HomeViewModel vm;
+
+  const HomeContent({super.key, required this.vm});
 
   @override
   Widget build(BuildContext context) {
-    final vm = context.watch<HomeViewModel>();
-
     return Stack(children: [_buildBackground(), _buildForeground(context, vm)]);
   }
 

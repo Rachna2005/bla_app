@@ -1,4 +1,4 @@
-import 'package:blabla/bla_app/lib/ui/screens/home/view_model/home_view_model.dart';
+import 'view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,10 +10,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RidePreferenceState preferenceState = context.read<RidePreferenceState>();
+
     return ChangeNotifierProvider(
-      create: (context) =>
-          HomeViewModel(preferenceState: context.watch<RidePreferenceState>()),
-      child: HomeContent(),
+      create: (_) => HomeViewModel(preferenceState: preferenceState),
+      builder: (context, child) {
+        HomeViewModel vm = context.watch<HomeViewModel>();
+
+        return HomeContent(vm: vm);
+      },
     );
   }
 }
